@@ -1,0 +1,9 @@
+﻿@using TestBlazor
+@code {
+    [Parameter]
+    public Character Character { get; set; }
+}
+
+<div class="character" style="left:@(Character.X * 50)px; top:@(Character.Y * 50)px;">
+    🧍‍♂️
+</div>

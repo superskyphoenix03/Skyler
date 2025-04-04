@@ -1,0 +1,26 @@
+﻿@page "/game"
+@using TestBlazor
+@inject IJSRuntime JSRuntime
+
+<div class="game-grid">
+    <CharacterComponent Character="Character" />
+</div>
+
+@code {
+    private Character Character = new Character(5, 5);
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("initializeKeyListeners", DotNetObjectReference.Create(this));
+        }
+    }
+
+    [JSInvokable]
+    public void MoveCharacter(string direction)
+    {
+        Character.Move(direction);
+        StateHasChanged();
+    }
+}
